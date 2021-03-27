@@ -26,7 +26,7 @@ namespace ChemicalApp.ViewModel
 
             }
         }
-        private ObservableCollection<Element> elements = new ObservableCollection<Element>() { new Element() { Max = 10.5453m, Min = 0.65m, Name = "C", Value = 4.64m, Predicted = 2.232m  } } ; 
+        private ObservableCollection<Element> elements = new ObservableCollection<Element>() { new Element() { Max = 10.5453m, Min = 0.65m, Name = "C", Value = 4.64m, Predicted = 0.232m  } } ; 
 
 
         public bool IsBysy
