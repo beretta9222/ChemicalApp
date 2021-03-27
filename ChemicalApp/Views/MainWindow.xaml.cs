@@ -23,6 +23,7 @@ namespace ChemicalApp
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new ViewModel.MainViewModel();
         }
     }
 }

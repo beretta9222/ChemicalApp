@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Eliments>
+  <Element>
+    <Name>C</Name>
+    <Value>5</Value>
+    <Max>10</Max>
+    <Min>2</Min>
+  </Element>
+  <Element>
+    <Name>Mn</Name>
+    <Value>10</Value>
+    <Max>15</Max>
+    <Min>12</Min>
+  </Element>
+  <Element>
+    <Name>Si</Name>
+    <Value>10</Value>
+    <Max>15</Max>
+    <Min>2</Min>
+  </Element>
+  <Element>
+    <Name>Cr</Name>
+    <Value>10</Value>
+    <Max>15</Max>
+    <Min>2</Min>
+  </Element>
+  <Element>
+    <Name>Ni</Name>
+    <Value>10</Value>
+    <Max>15</Max>
+    <Min>2</Min>
+  </Element>
+  <Element>
+    <Name>Cu</Name>
+    <Value>10</Value>
+    <Max>15</Max>
+    <Min>2</Min>
+  </Element>
+  <Element>
+    <Name>V</Name>
+    <Value>10</Value>
+    <Max>15</Max>
+    <Min>2</Min>
+  </Element>
+  <Element>
+    <Name>P</Name>
+    <Value>10</Value>
+    <Max>15</Max>
+    <Min>2</Min>
+  </Element>
+</Eliments>
+

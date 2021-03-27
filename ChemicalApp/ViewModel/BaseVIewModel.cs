@@ -96,12 +96,23 @@ namespace ChemicalApp.ViewModel
 
         #region Propertychanged
 
+        /// <summary>
+        /// Применить изменения
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="action"></param>
         protected void OnPropertyChanged<T>(Expression<Func<T>> action)
         {
             var propertyName = GetPropertyName(action);
             OnPropertyChanged(propertyName);
         }
 
+        /// <summary>
+        /// Получить название свойства
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="action"></param>
+        /// <returns></returns>
         private static string GetPropertyName<T>(Expression<Func<T>> action)
         {
             var expression = (MemberExpression)action.Body;
@@ -109,6 +120,10 @@ namespace ChemicalApp.ViewModel
             return propertyName;
         }
 
+        /// <summary>
+        /// Применение свойства по имени
+        /// </summary>
+        /// <param name="propertyName"></param>
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChangedEventHandler handler = PropertyChanged;

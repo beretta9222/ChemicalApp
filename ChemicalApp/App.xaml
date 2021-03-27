@@ -4,6 +4,110 @@
              xmlns:local="clr-namespace:ChemicalApp"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-         
+
+        <SolidColorBrush x:Key="MainForeground" Color="#777777"/>
+        <SolidColorBrush x:Key="MainBackground" Color="#888888"/>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource MainForeground}"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <ControlTemplate x:Key="validationFailed">
+            <StackPanel Orientation="Horizontal">
+                <Border BorderBrush="Red" BorderThickness="2">
+                    <AdornedElementPlaceholder />
+                </Border>
+                <TextBlock Foreground="Red" FontSize="22" FontWeight="Bold">!</TextBlock>
+            </StackPanel>
+        </ControlTemplate>
+
+        <Style TargetType="ListBoxItem">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Opacity" Value="0.85"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+                        <Border 
+                                BorderBrush="Gray"
+                                BorderThickness="1"
+                                CornerRadius="15"
+                                Height="250"
+                                Width="400"
+                               >
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <!--Name element-->
+                                <TextBlock 
+                                    Text="{Binding Name}" 
+                                    FontSize="80"
+                                    Margin="15"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Grid.RowSpan="2"
+                                    Grid.Row="1"
+                                    Grid.Column="2"/>
+                                <!--Element value -->
+                                
+                                <TextBlock 
+                                    Text="{Binding Value, StringFormat=Знач.: {0:#.###}}"
+                                    FontSize="40"
+                                    Grid.Row="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Grid.ColumnSpan="2"
+                                    />
+                                <!-- Минимальное и максимальное значение-->
+                                <Border 
+                                    Background="#55DDDDDD"                                    
+                                    Grid.ColumnSpan="3"
+                                    CornerRadius="15">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock  
+                                    Text="{Binding Min, StringFormat=Мин.: {0:0.##}}"
+                                    FontSize="25"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Grid.Column="0"/>
+                                        <TextBlock 
+                                    Text="{Binding Max, StringFormat=Макс.: {0:0.##}}"
+                                    FontSize="25"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Grid.Column="1"/>
+                                    </Grid>
+                                </Border>
+                                <TextBlock 
+                                    Text="{Binding Max, StringFormat=Прогноз.: {0:0.##}}"
+                                    FontSize="25"                                    
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Grid.ColumnSpan="2"
+                                    Grid.Row="2"/>
+                            </Grid>
+
+                        </Border>
+                    </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
     </Application.Resources>
 </Application>
