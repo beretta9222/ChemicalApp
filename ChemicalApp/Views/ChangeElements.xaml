@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChemicalApp.Views"
+        xmlns:helpers="clr-namespace:ChemicalApp.Helpers"
         mc:Ignorable="d"
         Height="500" Width="900" ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
     
@@ -92,10 +93,17 @@
                                     VerticalAlignment="Center"
                                     Grid.ColumnSpan="1"
                                     Grid.Row="3"/>
-                            <TextBox Text="{Binding Predicted}"
+                            <TextBox Validation.ErrorTemplate="{StaticResource validationFailed}"
                                      Grid.Row="3"
                                      Grid.Column="1"
                                      FontSize="25">
+                                <TextBox.Text>
+                                    <Binding Path="Predicted" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <helpers:ValidationValue/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
                                 <TextBox.Template>
                                     <ControlTemplate TargetType="{x:Type TextBoxBase}">
                                         <Border Name="Border"

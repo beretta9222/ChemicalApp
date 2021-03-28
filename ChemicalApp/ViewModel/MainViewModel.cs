@@ -38,11 +38,11 @@ namespace ChemicalApp.ViewModel
                 foreach (var item in xdoc.Element("root").Element("Elements").Elements("Element"))
                 {
                     Element element = new Element();
-                    element.Max = decimal.Parse(item.Element("Max").Value);
-                    element.Min = decimal.Parse(item.Element("Min").Value);
-                    element.Value = decimal.Parse(item.Element("Value").Value);
+                    element.Max = decimal.Parse(item.Element("Max").Value.Replace('.', ','));
+                    element.Min = decimal.Parse(item.Element("Min").Value.Replace('.', ','));
+                    element.Value = decimal.Parse(item.Element("Value").Value.Replace('.', ','));
                     element.Name = item.Element("Name").Value;
-                    element.Predicted = item.Element("Predicted")?.Value != null ? decimal.Parse(item.Element("Predicted").Value) : 1m;
+                    element.Predicted = item.Element("Predicted")?.Value != null ? decimal.Parse(item.Element("Predicted").Value.Replace('.', ',')) : 1m;
                     elementList.Add(element);
                 }
                 await Task.Delay(2000);                
@@ -53,7 +53,7 @@ namespace ChemicalApp.ViewModel
                     coefficient.Min = decimal.Parse(item.Element("Min").Value);
                     coefficient.Value = decimal.Parse(item.Element("Value").Value);
                     coefficient.Name = item.Element("Name").Value;
-                    coefficient.Predicted = item.Element("Predicted")?.Value != null ? decimal.Parse(item.Element("Predicted").Value) : 1m;
+                    coefficient.Predicted = item.Element("Predicted")?.Value != null ? decimal.Parse(item.Element("Predicted").Value.Replace('.', ',')) : 1m;
                 }
                 
                 await Task.Delay(2000);
@@ -146,17 +146,18 @@ namespace ChemicalApp.ViewModel
         }
         private Visibility messageVisibility;
 
-        public Command ChangeCommand => changeCommand ?? (changeCommand = new Command(() => 
+        public Command ChangeCommand => changeCommand ?? (changeCommand = new Command(async () => 
         {
             IsBysy = true;
             Message = "Обновление";
+
             List<Element> tmpElements = Elements.Where(x=>x.Name != "CEq").ToList();
             Coefficient tmp_coefficient = (Coefficient)Elements.FirstOrDefault(x=>x.Name == "CEq");
 
             Elements = null;
             Views.ChangeElements change = new Views.ChangeElements(tmpElements);
             change.ShowDialog();
-
+            await Task.Delay(3000);
             Elements = new ObservableCollection<Element>();
             foreach (var item in tmpElements)
             {
@@ -164,6 +165,7 @@ namespace ChemicalApp.ViewModel
             }
             tmp_coefficient.CalculateCoefficient(Elements);
             Elements.Add(tmp_coefficient);
+            
             IsBysy = false;
         }));
         private Command changeCommand;

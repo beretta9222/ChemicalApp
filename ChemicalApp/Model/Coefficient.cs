@@ -30,7 +30,7 @@ namespace ChemicalApp.Model
                 CoefficientElements = new Dictionary<string, decimal>();
                 foreach (var item in xdoc.Element("root").Element("Coefficients").Elements("Coefficient"))
                 {
-                    CoefficientElements.Add(item.Element("Element").Value, decimal.Parse(item.Element("K").Value));
+                    CoefficientElements.Add(item.Element("Element").Value, decimal.Parse(item.Element("K").Value.Replace('.', ',')));
 
                 }
                 return true;
