@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Eliments>
+<root>
+<Elements>
   <Element>
     <Name>C</Name>
     <Value>5</Value>
@@ -48,5 +49,45 @@
     <Max>15</Max>
     <Min>2</Min>
   </Element>
-</Eliments>
-
+</Elements>
+<Coefficients>
+  <Element>
+    <Name>CEq</Name>
+    <Value>0,22</Value>
+    <Max>2</Max>
+    <Min>0,5</Min>
+  </Element>
+  <Coefficient>
+    <Element>C</Element>
+    <K>1</K>
+  </Coefficient>
+  <Coefficient>
+    <Element>Mn</Element>
+    <K>0,167</K>
+  </Coefficient>
+  <Coefficient>
+    <Element>Si</Element>
+    <K>0,041</K>
+  </Coefficient>
+  <Coefficient>
+    <Element>Cr</Element>
+    <K>0,2</K>
+  </Coefficient>
+  <Coefficient>
+    <Element>Ni</Element>
+    <K>0,025</K>
+  </Coefficient>
+  <Coefficient>
+    <Element>Cu</Element>
+    <K>0,077</K>
+  </Coefficient>
+  <Coefficient>
+    <Element>V</Element>
+    <K>0,071</K>
+  </Coefficient>
+  <Coefficient>
+    <Element>P</Element>
+    <K>0,5</K>
+  </Coefficient>
+</Coefficients>
+</root>

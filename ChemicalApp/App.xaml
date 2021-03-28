@@ -32,7 +32,18 @@
                 <TextBlock Foreground="Red" FontSize="22" FontWeight="Bold">!</TextBlock>
             </StackPanel>
         </ControlTemplate>
-
+       
+        <Style TargetType="ListBox">
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" Margin="2"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
         <Style TargetType="ListBoxItem">
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="Margin" Value="10"/>
