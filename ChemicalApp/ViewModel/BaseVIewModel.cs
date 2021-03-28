@@ -19,7 +19,7 @@ namespace ChemicalApp.ViewModel
         {
             get
             {
-                return new BaseCommand(CloseApplication);
+                return new Command(CloseApplication);
             }
         }
 
@@ -27,7 +27,7 @@ namespace ChemicalApp.ViewModel
         {
             get
             {
-                return new BaseCommand(MaximiceApplication);
+                return new Command(MaximiceApplication);
             }
         }
 
@@ -35,7 +35,7 @@ namespace ChemicalApp.ViewModel
         {
             get
             {
-                return new BaseCommand(MinimiceApplication);
+                return new Command(MinimiceApplication);
             }
         }
 
@@ -43,7 +43,7 @@ namespace ChemicalApp.ViewModel
         {
             get
             {
-                return new BaseCommand(DragMoveCommand);
+                return new Command(DragMoveCommand);
             }
         }
 
@@ -51,7 +51,7 @@ namespace ChemicalApp.ViewModel
         {
             get
             {
-                return new BaseCommand(RestartCommand);
+                return new Command(RestartCommand);
             }
         }
 
@@ -140,13 +140,13 @@ namespace ChemicalApp.ViewModel
 
     }
     #endregion
-    #region BaseCommand
-    internal class BaseCommand : ICommand
+    #region Command
+    public class Command : ICommand
     {
         private readonly Action _command;
         private readonly Func<bool> _canExecute;
 
-        public BaseCommand(Action command, Func<bool> canExecute = null)
+        public Command(Action command, Func<bool> canExecute = null)
         {
             if (command == null)
                 throw new ArgumentNullException("command");
@@ -158,12 +158,35 @@ namespace ChemicalApp.ViewModel
         {
             _command();
         }
+      
 
         public bool CanExecute(object parameter)
         {
             if (_canExecute == null)
                 return true;
             return _canExecute();
+        }
+
+        public event EventHandler CanExecuteChanged;
+    }
+    public class Commands : ICommand
+    {
+        private Action<object> _action;
+        private bool _canExecute;
+        public Commands(Action<object> action, bool canExecute)
+        {
+            _action = action;
+            _canExecute = canExecute;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return _canExecute;
+        }        
+
+        public void Execute(object parameter)
+        {
+            _action(parameter);
         }
 
         public event EventHandler CanExecuteChanged;

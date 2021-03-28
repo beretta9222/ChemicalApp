@@ -1,0 +1,127 @@
+﻿<Window x:Class="ChemicalApp.Views.ChangeElements"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChemicalApp.Views"
+        mc:Ignorable="d"
+        Height="500" Width="900" ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="AUTO"/>
+        </Grid.RowDefinitions>
+        <ListView ItemsSource="{Binding Elements}" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 >
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="2"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border 
+                                BorderBrush="Gray"
+                                BorderThickness="1"
+                                CornerRadius="15"
+                                Height="250"
+                                Width="400"
+                               >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <!--Name element-->
+                            <TextBlock 
+                                    Text="{Binding Name}" 
+                                    FontSize="80"
+                                    Margin="15"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Grid.RowSpan="2"
+                                    Grid.Row="1"
+                                    Grid.Column="2"/>
+                            <!--Element value -->
+
+                            <TextBlock 
+                                    Text="{Binding Value, StringFormat=Знач.: {0:0.###}}"
+                                    FontSize="40"
+                                    Grid.Row="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Grid.ColumnSpan="2"
+                                    />
+                            <!-- Минимальное и максимальное значение-->
+                            <Border 
+                                    Background="#55DDDDDD"                                    
+                                    Grid.ColumnSpan="3"
+                                    CornerRadius="15">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock  
+                                    Text="{Binding Min, StringFormat=Мин.: {0:0.##}}"
+                                    FontSize="25"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Grid.Column="0"/>
+                                    <TextBlock 
+                                    Text="{Binding Max, StringFormat=Макс.: {0:0.##}}"
+                                    FontSize="25"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Grid.Column="1"/>
+                                </Grid>
+                            </Border>
+                            <TextBlock 
+                                    Text="Прогноз.:"
+                                    FontSize="25"                                    
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Grid.ColumnSpan="1"
+                                    Grid.Row="3"/>
+                            <TextBox Text="{Binding Predicted}"
+                                     Grid.Row="3"
+                                     Grid.Column="1"
+                                     FontSize="25">
+                                <TextBox.Template>
+                                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                                        <Border Name="Border"
+                                            CornerRadius="15"
+                                            Padding="3"
+                                            BorderThickness="1"
+                                            Background="#55888888"
+                                                >     
+                                            <ScrollViewer 
+                                                Margin="0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                x:Name="PART_ContentHost" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </TextBox.Template>
+                            </TextBox>
+                        </Grid>
+
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Content="Сохранить"
+                Command="{Binding SaveChangeCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                Grid.Row="1"/>
+    </Grid>
+</Window>

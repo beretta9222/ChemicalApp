@@ -145,5 +145,27 @@ namespace ChemicalApp.ViewModel
             }
         }
         private Visibility messageVisibility;
+
+        public Command ChangeCommand => changeCommand ?? (changeCommand = new Command(() => 
+        {
+            IsBysy = true;
+            Message = "Обновление";
+            List<Element> tmpElements = Elements.Where(x=>x.Name != "CEq").ToList();
+            Coefficient tmp_coefficient = (Coefficient)Elements.FirstOrDefault(x=>x.Name == "CEq");
+
+            Elements = null;
+            Views.ChangeElements change = new Views.ChangeElements(tmpElements);
+            change.ShowDialog();
+
+            Elements = new ObservableCollection<Element>();
+            foreach (var item in tmpElements)
+            {
+                Elements.Add(item);
+            }
+            tmp_coefficient.CalculateCoefficient(Elements);
+            Elements.Add(tmp_coefficient);
+            IsBysy = false;
+        }));
+        private Command changeCommand;
     }
 }

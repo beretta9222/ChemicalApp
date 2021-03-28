@@ -15,12 +15,13 @@
         <ListBox 
             ItemsSource="{Binding Elements}" 
             Background="Transparent"  
-            
+            Style="{StaticResource main}"
             />
         <Button 
             Content="Изменить" 
             Grid.Row="1" 
-            HorizontalAlignment="Center"/>
+            Command="{Binding ChangeCommand}"
+            />
         <Grid 
             Visibility="{Binding MessageVisibility, FallbackValue=Collapsed}"
             Background="#AA555555"

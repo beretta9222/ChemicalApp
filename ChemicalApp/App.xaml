@@ -6,9 +6,10 @@
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
 
-       
+
         <helpers:BackgroundConverter x:Key="BackgroundConverter"/>
-        <helpers:ForegroundConverter x:Key="ForegroundConverter"/> 
+        <helpers:ForegroundConverter x:Key="ForegroundConverter"/>
+        <!--#region  TextBlock-->
         <Style TargetType="TextBlock">
             <Setter Property="Foreground">
                 <Setter.Value>
@@ -24,6 +25,8 @@
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
+        <!--#endregion-->
+        <!--#region  Validation-->
         <ControlTemplate x:Key="validationFailed">
             <StackPanel Orientation="Horizontal">
                 <Border BorderBrush="Red" BorderThickness="2">
@@ -32,8 +35,34 @@
                 <TextBlock Foreground="Red" FontSize="22" FontWeight="Bold">!</TextBlock>
             </StackPanel>
         </ControlTemplate>
-       
-        <Style TargetType="ListBox">
+        <!--#endregion-->
+        <!--#region  Button-->
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                            CornerRadius="15" 
+                            MinHeight="50" 
+                            Background="#AAAAAA"
+                            >
+                            <Grid>
+
+                                <TextBlock 
+                                Foreground="White"
+                                Text="{TemplateBinding Content}" 
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                />
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--#endregion-->
+        <!--#region  ListBox-->
+        <Style TargetType="ListBox" x:Key="main">
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
             <Setter Property="ItemsPanel">
                 <Setter.Value>
@@ -42,16 +71,30 @@
                     </ItemsPanelTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <DataTrigger 
+            Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Elements.Count}" 
+            Value="0"
+            >
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <TextBlock>No items to display</TextBlock>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
-        
+
         <Style TargetType="ListBoxItem">
-                <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="Margin" Value="10"/>
-                <Setter Property="BorderThickness" Value="0"/>
-                <Setter Property="Opacity" Value="0.85"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="ListBoxItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Opacity" Value="0.85"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
                         <Border 
                                 BorderBrush="Gray"
                                 BorderThickness="1"
@@ -75,7 +118,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
                                 <!--Name element-->
                                 <TextBlock 
@@ -88,9 +131,9 @@
                                     Grid.Row="1"
                                     Grid.Column="2"/>
                                 <!--Element value -->
-                                
+
                                 <TextBlock 
-                                    Text="{Binding Value, StringFormat=Знач.: {0:#.###}}"
+                                    Text="{Binding Value, StringFormat=Знач.: {0:0.###}}"
                                     FontSize="40"
                                     Grid.Row="1"
                                     HorizontalAlignment="Center"
@@ -132,9 +175,12 @@
 
                         </Border>
                     </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--#endregion-->
 
+
+        <!--#endregion-->
     </Application.Resources>
 </Application>
